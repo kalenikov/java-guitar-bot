@@ -1,0 +1,85 @@
+package com.kalenikov.bot.telegram;
+
+import com.kalenikov.bot.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+public final class Bot extends TelegramLongPollingCommandBot {
+    private static final Logger log = LoggerFactory.getLogger(Bot.class.getName());
+
+    public Bot() {
+        super();
+    }
+
+    @Override
+    public String getBotToken() {
+        return Config.TOKEN;
+    }
+
+    @Override
+    public String getBotUsername() {
+        return Config.USER;
+    }
+
+
+//    @Vintros
+
+    // если пишет в личку НЕ АМДИН: иди нахуй, ты не мой хозяин
+    // если пишет в личку АМДИН: переслать в чат
+    // если в общем чате: генератор ответов https://fish-text.ru/api
+    @Override
+    public void processNonCommandUpdate(Update update) {
+        Message msg = update.getMessage();
+        String messageText = msg.getText();
+        String user = msg.getFrom().getFirstName();
+        boolean isAdmin = Config.isAdmin(msg.getFrom().getId());
+        boolean isToxicChat = msg.getChatId().toString().equals(Config.getChatId());
+        boolean isMessageToBot = messageText.contains(Config.USER);
+
+        log.info("processNonCommandUpdate, " +
+                        "user: {}, " +
+                        "isAdmin: {}, " +
+                        "isToxicChat: {}, " +
+                        "isMessageToBot: {}, " +
+                        "messageText: {}",
+                user, isAdmin, isToxicChat, isMessageToBot, messageText);
+        String textAnswer = null;
+        String targetChatId = msg.getChatId().toString();
+
+//        ЛС
+        if (!isToxicChat) {
+            if (!isAdmin) {
+                textAnswer = "иди нахуй, ты не мой хозяин";
+            } else {
+                textAnswer = messageText;
+                targetChatId = Config.getChatId();
+            }
+        }
+
+        // общий чат
+        if (isToxicChat && isMessageToBot) {
+            if (isAdmin) {
+                textAnswer = "слушаюс и повенуюс";
+            } else {
+                textAnswer = "иди нахуй, пёс!";
+            }
+        }
+
+        if (textAnswer != null) {
+            SendMessage answer = new SendMessage();
+            answer.setText(textAnswer);
+            answer.setChatId(targetChatId);
+            try {
+                execute(answer);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}

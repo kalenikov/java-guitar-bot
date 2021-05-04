@@ -1,0 +1,2 @@
+2021-05-04 14:30:05 INFO  Bot:44 - processNonCommandUpdate, user: Sergey, isAdmin: true, isToxicChat: true, isMessageToBot: false, messageText: 123
+2021-05-04 14:30:30 INFO  Bot:44 - processNonCommandUpdate, user: Sergey, isAdmin: true, isToxicChat: true, isMessageToBot: false, messageText: 1233
