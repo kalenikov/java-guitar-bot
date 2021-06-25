@@ -10,8 +10,8 @@
 <!--        <property name="hibernate.connection.driver_class">net.sf.log4jdbc.DriverSpy</property>-->
         <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/random_cards</property>
 <!--        <property name="hibernate.connection.url">jdbc:log4jdbc:postgresql://127.0.0.1:5432/random_cards</property>-->
-        <property name="hibernate.connection.username">serj</property>
-        <property name="hibernate.connection.password">123</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">example</property>
         <!-- JDBC connection pool (use the built-in) -->
         <property name="hibernate.connection.pool_size">1</property>
         <!-- Echo all executed SQL to stdout -->

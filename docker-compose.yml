@@ -7,9 +7,14 @@ services:
     restart: always
     ports:
       - 8080:8080
-
   db:
     image: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: example
+  bot:
+    build: ./Dockerfile
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+
