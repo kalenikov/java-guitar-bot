@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
 
-public class StartCommand extends ServiceCommand {
+public class StartCommand extends BaseCommand {
 
     public StartCommand(String identifier, String description) {
         super(identifier, description);
