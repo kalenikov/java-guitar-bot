@@ -8,15 +8,12 @@
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 <!--        <property name="hibernate.connection.driver_class">net.sf.log4jdbc.DriverSpy</property>-->
-        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/random_cards</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-52-19-164-214.eu-west-1.compute.amazonaws.com:5432/dabumee0usqtj1</property>
 <!--        <property name="hibernate.connection.url">jdbc:log4jdbc:postgresql://127.0.0.1:5432/random_cards</property>-->
-        <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">example</property>
-        <!-- JDBC connection pool (use the built-in) -->
+        <property name="hibernate.connection.username">czwnavdokcxpuw</property>
+        <property name="hibernate.connection.password">3d64250edc902c4fe623596ff9e8826eb3300cbcb8fe7d24b9606c2618e7b33a</property>
         <property name="hibernate.connection.pool_size">1</property>
-        <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
-        <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.connection.CharSet">utf8</property>

@@ -4,7 +4,7 @@ import com.kalenikov.model.Card;
 
 import java.util.List;
 
-public interface Store extends AutoCloseable {
+public interface Store{
     void init();
 
     Card save(Card item);

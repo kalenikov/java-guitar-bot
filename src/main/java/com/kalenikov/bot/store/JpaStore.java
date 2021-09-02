@@ -1,10 +1,12 @@
 package com.kalenikov.bot.store;
 
 import com.kalenikov.model.Card;
+import com.kalenikov.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,8 +57,7 @@ public class JpaStore implements Store {
                 .createQuery("from Card order by lastSeen")
                 .setMaxResults(1).list().get(0);
 
-        var minmax = session
-                .createQuery("select min(id),max(id) from Card ");
+        Query minmax = session.createQuery("select min(id),max(id) from Card ");
 
         session.createQuery("UPDATE Card SET lastSeen =:now WHERE id =:id")
                 .setParameter("now", Timestamp.valueOf(LocalDateTime.now()))
@@ -67,8 +68,9 @@ public class JpaStore implements Store {
         return card;
     }
 
-    @Override
-    public void close() throws Exception {
-
+    public static void main(String[] args) {
+        Store store = new JpaStore(HibernateUtil.getSessionFactory());
+        Card card = store.next();
+        System.out.println(card);
     }
 }
