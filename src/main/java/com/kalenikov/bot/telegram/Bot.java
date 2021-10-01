@@ -13,6 +13,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
 
     public Bot() {
         super();
+        log.debug("bot created");
     }
 
     @Override

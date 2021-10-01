@@ -2,6 +2,7 @@ package com.kalenikov.bot.store;
 
 import com.kalenikov.model.Card;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface Store{
@@ -11,11 +12,11 @@ public interface Store{
 
     boolean delete(int id);
 
-    List<Card> findAll();
+    List<Card> findAll() throws SQLException;
 
-    List<Card> findByName(String key);
+    List<Card> findByName(String name);
 
-    Card findById(int id);
+    Card get(int id) throws SQLException;
 
-    Card next();
+    Card next() throws SQLException;
 }

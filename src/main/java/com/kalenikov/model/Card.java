@@ -1,24 +1,17 @@
 package com.kalenikov.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "cards")
+@ToString(exclude = {"id"})
+@EqualsAndHashCode(of = {"id"})
 public class Card {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "time_last_seen")
     private Timestamp lastSeen;
-
-    public Card() {
-    }
 }

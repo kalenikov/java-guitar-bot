@@ -1,11 +1,11 @@
 package com.kalenikov.bot.telegram;
 
-import com.kalenikov.bot.Config;
-import com.kalenikov.bot.store.JpaStore;
+import com.kalenikov.bot.store.jdbc.JDBCStore;
+import com.kalenikov.bot.store.jpa.JpaStore;
 import com.kalenikov.bot.store.Store;
 import com.kalenikov.model.Card;
 import com.kalenikov.utils.HibernateUtil;
-import lombok.extern.java.Log;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
@@ -23,9 +23,10 @@ public class NextCommand extends BaseCommand {
         super(commandIdentifier, description);
     }
 
+    @SneakyThrows
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        Store store = new JpaStore(HibernateUtil.getSessionFactory());
+        Store store = JDBCStore.getInstance();
         Card card = store.next();
 
         SendMessage sm = new SendMessage();
